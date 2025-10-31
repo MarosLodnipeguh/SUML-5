@@ -25,29 +25,30 @@ st.success('Gratulacje! Z powodzeniem uruchomiłeś aplikację')
 
 # główny tytuł aplikacji (dostosuj do swoich potrzeb)
 st.title('Tłumacz EN → DE i analiza sentymentu — Lab05')
+st.image('https://streamlit.io/images/brand/streamlit-mark-secondary.png', width=100)
 # title, jak sama nazwa wskazuje, używamy do wyświetlenia tytułu naszej aplikacji
 
-# st.header('Wprowadzenie do zajęć')
+st.header('Wprowadzenie do zajęć')
 # header to jeden z podtytułów wykorzystywnaych w Streamlit
 
-# st.subheader('O Streamlit')
+st.subheader('O Streamlit')
 # subheader to jeden z podtytułów wykorzystywnaych w Streamlit
 
-# st.text('To przykładowa aplikacja z wykorzystaniem Streamlit')
+st.text('To przykładowa aplikacja z wykorzystaniem Streamlit')
 # text używamy do wyświetlenia dowolnego tekstu. Można korzystać z polskich znaków.
 
-# st.write('Streamlit jest biblioteką pozwalającą na uruchomienie modeli uczenia maszynowego.')
+st.write('Streamlit jest biblioteką pozwalającą na uruchomienie modeli uczenia maszynowego.')
 # write używamy również do wyświetlenia tekstu, różnica polega na formatowaniu.
 
-# st.code("st.write()", language='python')
+st.code("st.write()", language='python')
 # code może nam się czasami przydać, jeżeli chcielibyśmy pokazać np. klientowi fragment kodu, który wykorzystujemy w aplikacji
 
-# with st.echo():
-#     st.write("Echo")
+with st.echo():
+    st.write("Echo")
 # możemy też to zrobić prościej używając echo - pokazujemy kod i równocześnie go wykonujemy
 
-# df = pd.read_csv("DSP_4.csv", sep = ';')
-# st.dataframe(df)
+df = pd.read_csv("DSP_4.csv", sep = ';')
+st.dataframe(df)
 # musimy tylko pamiętać o właściwym określeniu separatora (w tym wypadku to średnik)
 # masz problem z otworzeniem pliku? sprawdź w jakim katalogu pracujesz i dodaj tam plik (albo co bardziej korzystne - zmień katalog pracy)
 # os.getcwd() # pokaż bieżący katalog
@@ -63,21 +64,21 @@ option = st.selectbox(
     ],
 )
 
-if option == "Wydźwięk emocjonalny tekstu (eng)":
-    text = st.text_area(label="Wpisz tekst")
-    if text:
-        with st.spinner('Analizuję sentyment...'):
-            try:
-                classifier = pipeline("sentiment-analysis")
-                answer = classifier(text)
-                st.success('Analiza zakończona')
-                st.write(answer)
-            except Exception as e:
-                st.error(f'Wystąpił błąd podczas analizy: {e}')
+# if option == "Wydźwięk emocjonalny tekstu (eng)":
+#     text = st.text_area(label="Wpisz tekst")
+#     if text:
+#         with st.spinner('Analizuję sentyment...'):
+#             try:
+#                 classifier = pipeline("sentiment-analysis")
+#                 answer = classifier(text)
+#                 st.success('Analiza zakończona')
+#                 st.write(answer)
+#             except Exception as e:
+#                 st.error(f'Wystąpił błąd podczas analizy: {e}')
 
-elif option == "Tłumaczenie tekstu (en - de)":
-    text = st.text_area(label="Wpisz tekst po ang")
-    if text:
+# if option == "Tłumaczenie tekstu (en - de)":
+text = st.text_area(label="Wpisz tekst po ang")
+if text:
         with st.spinner('Tłumacze tekst'):
             try:
                 translator = pipeline("translation_en_to_de", model="Helsinki-NLP/opus-mt-en-de")
